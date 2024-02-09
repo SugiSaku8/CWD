@@ -81,7 +81,7 @@ print(f"損失: {score[0]} / 精度: {score[1]}")
 print("利用を開始します。")
 
 #実践編
-question = "You are very loud and annoying.")
+question = "You are very loud and annoying."
 tokens = tokenizer.texts_to_sequences([question])
 padded_tokens = tf.keras.preprocessing.sequence.pad_sequences(tokens, maxlen=250)
 predictions = model.predict(padded_tokens)
