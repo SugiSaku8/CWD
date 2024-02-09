@@ -56,14 +56,10 @@ model.compile(loss='binary_crossentropy',
               metrics=['accuracy'])
 print("______________________")
 print("モデルの学習を開始します")
-
-# Early stopping
-early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
-
 # Train the model with early stopping
 model.fit(X_train, y_train, epochs=1000, validation_data=(X_test, y_test))#, callbacks=[early_stopping]
-
 print("モデルの学習が終了しました。")
+
 
 # Function to analyze malice in a question
 def analyze_question(question):
@@ -91,6 +87,14 @@ for word, prediction in zip(question.split(), predictions[0]):
 
 #関数を利用
 print("保存します。")
+tokenizer_state = {
+    'word_index': tokenizer.word_index,
+    'index_word': tokenizer.index_word,
+    'num_words': tokenizer.num_words,
+    'document_count': tokenizer.document_count
+}
+with open('tokenizer.json', 'w') as f:
+    json.dump(tokenizer_state, f)
 saved_model_path = './Model/CWDmodel_V1'
 model.save(saved_model_path, save_format='tf')
 print(f"モデルは、 {saved_model_path}に保存されました。")

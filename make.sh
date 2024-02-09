@@ -1,1 +1,1 @@
-tensorflowjs_converter --input_format=tf_saved_model --output_format=tfjs_graph_model ./Model/ ./CWD_Model/
+tensorflowjs_converter --input_format=tf_saved_model --output_format=tfjs_graph_model ./Model/CWDmodel_V1 ./CWD_Model/
