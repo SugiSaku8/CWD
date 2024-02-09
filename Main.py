@@ -48,7 +48,7 @@ model.compile(loss='binary_crossentropy',
 print("______________________")
 print("モデルの学習を開始します")
 # Train the model
-model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+model.fit(X_train, y_train, epochs=1000, validation_data=(X_test, y_test))
 print("モデルの学習が終了しました。")
 # Function to analyze malice in a question
 def analyze_question(question):
@@ -63,6 +63,16 @@ print("テストを行います。")
 score = model.evaluate(X_test, y_test, verbose=0)
 print(f"損失: {score[0]} / 精度: {score[1]}")
 print("利用を開始します。")
+#実践編
+question = "おまえ、天才だなー"
+tokens = tokenizer.texts_to_sequences([question])
+padded_tokens = tf.keras.preprocessing.sequence.pad_sequences(tokens, maxlen=250)
+predictions = model.predict(padded_tokens)
+for word, prediction in zip(question.split(), predictions[0]):
+    if prediction >  0.5:  # Threshold for maliciousness
+        print(f"悪意のある言葉の可能性があります: {word}/スコア:${prediction}")
+#関数を利用
+print("_________________________________________")
 analyze_question("おめぇは関係ない。黙れ。")
 print("保存します。")
 saved_model_path = './Model/CWDmodel_V1'
