@@ -61,7 +61,7 @@ print("モデルの学習を開始します")
 early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 # Train the model with early stopping
-model.fit(X_train, y_train, epochs=1000, validation_data=(X_test, y_test), callbacks=[early_stopping])
+model.fit(X_train, y_train, epochs=1000, validation_data=(X_test, y_test))#, callbacks=[early_stopping]
 
 print("モデルの学習が終了しました。")
 
@@ -81,7 +81,7 @@ print(f"損失: {score[0]} / 精度: {score[1]}")
 print("利用を開始します。")
 
 #実践編
-question = "おまえ、天才だなー"
+question = "You are very loud and annoying.")
 tokens = tokenizer.texts_to_sequences([question])
 padded_tokens = tf.keras.preprocessing.sequence.pad_sequences(tokens, maxlen=250)
 predictions = model.predict(padded_tokens)
@@ -90,8 +90,6 @@ for word, prediction in zip(question.split(), predictions[0]):
         print(f"悪意のある言葉の可能性があります: {word}/スコア:${prediction}")
 
 #関数を利用
-print("_________________________________________")
-analyze_question("You are very loud and annoying.")
 print("保存します。")
 saved_model_path = './Model/CWDmodel_V1'
 model.save(saved_model_path, save_format='tf')
