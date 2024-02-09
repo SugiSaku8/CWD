@@ -65,6 +65,6 @@ print(f"損失: {score[0]} / 精度: {score[1]}")
 print("利用を開始します。")
 analyze_question("おめぇは関係ない。黙れ。")
 print("保存します。")
-saved_model_path = '/app/Model/CWDmodel_V1'
+saved_model_path = './Model/CWDmodel_V1'
 model.save(saved_model_path, save_format='tf')
 print(f"モデルは、 {saved_model_path}に保存されました。")
